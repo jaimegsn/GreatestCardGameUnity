@@ -1,44 +1,41 @@
-# GreatestCardGameUnity
+# Greatest Unity
 
-# Instalando o unity e inicializando o projeto
-1. Instalar Unity Hub
-2. Clonar projeto na máquina: 
+Greatest Unity é um jogo educacional em português feito no unity com o intuito de auxiliar o professor em sala de aula na realização de atividades que instiguem a aplicação de cenários práticos de teste de software.
 
+## Instalação
 
+- Instalar Unity Hub
+- Clonar projeto na máquina com o git:
+```bash
+git clone https://newgitlab.great.ufc.br/greatest/greatestcardgameunity.git
+```
+- Importar projeto no Unity Hub
+- Instalar Unity 2020.3.3f1
+- Instalar dendências do unity para Desktop e Android
+- Abrir o projeto do GreatestCardGameUnity
+- Fazer o download do unity SKD
+- Com o projeto unity aberto, importar os SDKS ao projeto.
+- Fazer o download dos assets
+- Inserir os assets baixados na pasta Assets do projeto.
+- Para configurar a Keystore é preciso seguir o seguinte passo a passo.
+- Clicar na opção File.
+- Clicar na opção Build Settings.
+- Clicar no botão Player Settings.
+- Clicar na aba Player.
+- Clicar no botão com a Logo da Android.
+- Clicar no Dropdown Publish Settings
+- Em Project Keystore, marcar a opção Custom Keystore
+- Clicar no campo Select, para selecionar a Keystore e procurar pelo arquivo
+- Em password, digitar a senha de acordo com o arquivo
 
-3. Importar projeto no Unity Hub
-4. Instalar Unity 2020.3.3f1
-5. Instalar dendências do unity para Desktop e Android
+## Uso
 
-# Instalando a SDK do Unity Firebase
-1. Abrir o projeto do GreatestCardGameUnity
-2. Fazer o download do unity SKD 
+Após a instalação basta realizar o build do jogo.
 
+## Contribuição
 
+Pull requests são bem vindas. Para mudanças maiores, por favor abra uma issue primeiro para discutir o que você gostaria de mudar.
 
+## Licença
 
-3. Com o projeto unity aberto, importar os SDKS ao projeto.
-
-# Instalando os assets do firebase
-1. Fazer o download dos assets 
-
-
-
-2. Inserir os assets baixados na pasta Assets do projeto.
-
-
-# Configurando a Keystore para conseguir realizar build do projeto para Android
-1. Para configurar a Keystore é preciso seguir o seguinte passo a passo. 
-2. Clicar na opção File.
-3. Clicar na opção Build Settings.
-4. Clicar no botão Player Settings.
-5. Clicar na aba Player.
-6. Clicar no botão com a Logo da Android.
-7. Clicar no Dropdown Publish Settings
-8. Em Project Keystore, marcar a opção Custom Keystore
-9. Clicar no campo Select, para selecionar a Keystore e procurar pelo arquivo
-10. Em password, digitar a senha de acordo com o arquivo 
-
-
-
-11. Após preencher os campos, basta fechar a janela e realizar o build do jogo.
+[GPLv3](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
