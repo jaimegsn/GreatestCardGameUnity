@@ -15,14 +15,16 @@ public class QuestionController : MonoBehaviour
     public TextAsset jsonFile;
 
     public TMP_Text diceText;
+	public TMP_Text conditionText;
 
-    List<Question> questionList = new List<Question>();
+	List<Question> questionList = new List<Question>();
     public Button responseQuestions;
 
     public TextMeshProUGUI questionTextFront;
-    public TextMeshProUGUI questionTextBack;
     public CanvasGroup anwserPanel;
-    bool haveQuestions = true;
+    public CanvasGroup playerTools;
+	public CanvasGroup challengePanel;
+	bool haveQuestions = true;
     public AudioClip diceSound;
     bool canAnswer = true;
     bool questionRight = false;
@@ -50,7 +52,6 @@ public class QuestionController : MonoBehaviour
     {
         if (haveQuestions)
         {
-            questionTextBack.text = questionTextFront.text;
             canAnswer = true;
         }
     }
@@ -74,7 +75,6 @@ public class QuestionController : MonoBehaviour
     public void SetQuestionUI()
     {
         questionTextFront.text = currentQuestion.questionText;
-        questionTextBack.text = questionTextFront.text;
     }
 
     public void AnswerQuestion(int value)
@@ -88,7 +88,10 @@ public class QuestionController : MonoBehaviour
 
     public IEnumerator AnimationQuestion(int value)
     {
-        foreach (var item in currentQuestion.anwser)
+		MenuTransitions.instance.HideCanvasGroup(anwserPanel);
+		MenuTransitions.instance.HideCanvasGroup(challengePanel);
+		MenuTransitions.instance.ShowCanvasGroup(playerTools);
+		foreach (var item in currentQuestion.anwser)
         {
             if (value == item.anwser)
             {
@@ -98,27 +101,25 @@ public class QuestionController : MonoBehaviour
             }
         }
         CheckIfAnwserIsCorrect(questionRight, diceRight);
-        MenuTransitions.instance.HideCanvasGroup(anwserPanel);
-    }
+		MenuTransitions.instance.HideCanvasGroup(playerTools);
+		MenuTransitions.instance.ShowCanvasGroup(challengePanel);
+	}
 
     public IEnumerator AnimationDice(int finalDiceValue, bool questionRight, bool diceRight, List<int> item)
     {
-        string feedbackMessage = "Você acertou!\n Mas para pontuar terá que obter os seguintes números do dado: (" + string.Join(",", item) + ") \n";
-        diceText.color = Color.white;
-        diceText.fontSize = 22;
-        diceText.text = feedbackMessage + "O dado irá rolar em 5";
+        string feedbackMessage = "Para pontuar você\nprecisa tirar: (" + string.Join(",", item) + ") \n\n";
+		//diceText.fontSize = 22;
+		conditionText.text = feedbackMessage + "Dado rola em 4s";
         yield return new WaitForSeconds(1f);
-        diceText.text = feedbackMessage + "O dado irá rolar em 4";
+		conditionText.text = feedbackMessage + "Dado rola em 3s";
         yield return new WaitForSeconds(1f);
-        diceText.text = feedbackMessage + "O dado irá rolar em 3";
+		conditionText.text = feedbackMessage + "Dado rola em 2s";
         yield return new WaitForSeconds(1f);
-        diceText.text = feedbackMessage + "dado irá rolar em 2";
+		conditionText.text = feedbackMessage + "Dado rola em 1s";
         yield return new WaitForSeconds(1f);
-        diceText.text = feedbackMessage + "dado irá rolar em 1";
+		conditionText.text = feedbackMessage;
         yield return new WaitForSeconds(1f);
         AudioManager.instance.PlaySound(diceSound);
-        diceText.fontSize = 12;
-        diceText.color = Color.yellow;
         diceText.text =  1.ToString();
         yield return new WaitForSeconds(0.1f);
         diceText.text = 3.ToString();
@@ -138,9 +139,7 @@ public class QuestionController : MonoBehaviour
         diceText.text = 5.ToString();
         yield return new WaitForSeconds(0.1f);
         diceText.text = "<b>" + finalDiceValue.ToString() + "<b>";
-        diceText.color = Color.cyan;
         yield return new WaitForSeconds(1);
-        diceText.color = Color.white;
         diceText.text = finalDiceValue.ToString();
 
 
@@ -203,7 +202,6 @@ public class QuestionController : MonoBehaviour
     public IEnumerator DiceAnimation(float newTime)
     {
         AudioManager.instance.PlaySound(diceSound);
-        diceText.color = Color.yellow;
         yield return new WaitForSeconds(newTime);
         diceText.text = 1.ToString();
         yield return new WaitForSeconds(newTime);
@@ -224,9 +222,7 @@ public class QuestionController : MonoBehaviour
         diceText.text = 5.ToString();
         yield return new WaitForSeconds(newTime);
         diceText.text = "<b>" + 2 + "<b>";
-        diceText.color = Color.cyan;
         yield return new WaitForSeconds(1);
-        diceText.color = Color.white;
         diceText.text = "2";
     }
 }
